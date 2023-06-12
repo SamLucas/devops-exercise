@@ -83,13 +83,13 @@ The complete api code is in the api folder, it was developed with TypeScript and
 
       ### Using ArgoCD CLI
 
-      instalando namespace:
+      create namespace:
 
       ```sh
       kubectl create namespace api-altbank
       ```
 
-      instalando app:
+      install app:
 
       ```sh
       argocd app create api-altbank --path k8s \
@@ -100,6 +100,12 @@ The complete api code is in the api folder, it was developed with TypeScript and
 
       ### Using ArgoCD Manifest
       
+      create namespace:
+
+      ```sh
+      kubectl create namespace api-altbank
+      ```
+
       To install the API with Argocd you can use this manifest ( [```api/argocd.ym```](./api/argocd.yml) ):
 
       ```sh 

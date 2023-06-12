@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-altbank
+  namespace: api-altbank
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-altbank
+  template:
+    metadata:
+      labels:
+        app: api-altbank
+    spec:
+      containers:
+        - name: api-altbank
+          image: registry.gitlab.com/sldanke93/api-altbank
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+              name: web
+          env:
+            - name: MORGAN_TYPE
+              value: prod
+            - name: API_PORT
+              value: "8080"
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /status
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1

@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api-altbank
+  namespace: argocd
+spec:
+  destination:
+    namespace: api-altbank
+    server: "https://192.168.49.2:8443"
+  source:
+    path: k8s
+    repoURL: "https://gitlab.com/sldanke93/api-altbank.git"
+    targetRevision: HEAD
+  sources: []
+  project: default

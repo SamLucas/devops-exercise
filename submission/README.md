@@ -19,7 +19,7 @@ The complete api code is in the api folder, it was developed with TypeScript and
       kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
       ```
 
-      to get the password do:
+      after the service is completely installed, you can get the facade password:
 
       ```sh
       argocd admin initial-password -n argocd
@@ -69,8 +69,6 @@ The complete api code is in the api folder, it was developed with TypeScript and
       ```sh
       argocd cluster list
       ```
-    
-
 
     - ## Install App in Minkube with Argo
 
@@ -98,6 +96,12 @@ The complete api code is in the api folder, it was developed with TypeScript and
       --dest-namespace api-altbank
       ```
 
+      just access the ```api-altbank-svc``` service url by running:
+
+      ```sh
+      minikube service list 
+      ```
+
       ### Using ArgoCD Manifest
       
       create namespace:
@@ -106,10 +110,10 @@ The complete api code is in the api folder, it was developed with TypeScript and
       kubectl create namespace api-altbank
       ```
 
-      To install the API with Argocd you can use this manifest ( [```api/argocd.ym```](./api/argocd.yml) ):
+      To install the API with Argocd you can use this manifest ( [```api/argocd.yml```](./api/argocd.yml) ):
 
       ```sh 
-      kubectl apply -f argocd.yml
+      kubectl apply -f api/argocd.yml
       ```
 
       ```yaml
@@ -131,6 +135,12 @@ The complete api code is in the api folder, it was developed with TypeScript and
         sources: []
         project: default
 
+      ```
+
+      just access the ```api-altbank-svc``` service url by running:
+
+      ```sh
+      minikube service list 
       ```
       
       Installing with argocd will install the following [objects](./api/k8s/) inside kubernetes:
@@ -213,6 +223,13 @@ The complete api code is in the api folder, it was developed with TypeScript and
     ```sh
     docker run -d -p 8080:8080 api-altbank 
     ```
+
+    just access the:
+
+    ```sh
+    http://localhost:8080/status
+    ```
+
     - ### Dockerfiles
 
       To create an api image, just use this dockerfile:
